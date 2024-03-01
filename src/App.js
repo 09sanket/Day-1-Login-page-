@@ -1,25 +1,52 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function LoginForm() {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        // Store login details in local storage
+        localStorage.setItem('username', username);
+        localStorage.setItem('password', password);
+
+        // Optionally, you can redirect the user to another page after successful login
+    };
+
+    return (
+        <div className="box">
+            <form onSubmit={handleSubmit} autoComplete="off">
+                <h2>Sign in</h2>
+                <div className="inputBox">
+                    <input 
+                        type="text" 
+                        required 
+                        value={username} 
+                        onChange={(e) => setUsername(e.target.value)} 
+                    />
+                    <span>Username</span>
+                    <i></i>
+                </div>
+                <div className="inputBox">
+                    <input 
+                        type="password" 
+                        required 
+                        value={password} 
+                        onChange={(e) => setPassword(e.target.value)} 
+                    />
+                    <span>Password</span>
+                    <i></i>
+                </div>
+                <div className="links">
+                    <a href="#">Forgot Password ?</a>
+                    <a href="#">Signup</a>
+                </div>
+                <input type="submit" value="Login" />
+            </form>
+        </div>
+    );
 }
 
-export default App;
+export default LoginForm;
